@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Booking #{{ booking.id }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    .container { max-width: 400px; margin: 20px auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>Edit Booking #{{ booking.id }}</h2>
+      <form method="POST">
+        <input type="text" name="customer_name" placeholder="Customer Name" value="{{ booking.customer_name }}" required>
+        <input type="text" name="customer_phone" placeholder="Customer Phone" value="{{ booking.customer_phone }}" required>
+        <label>Service:</label>
+        <select name="service_type" required>
+          <option value="breakfast" {% if booking.service_type == 'breakfast' %}selected{% endif %}>Breakfast</option>
+          <option value="lunch" {% if booking.service_type == 'lunch' %}selected{% endif %}>Lunch</option>
+          <option value="dinner" {% if booking.service_type == 'dinner' %}selected{% endif %}>Dinner</option>
+        </select>
+        <label>Party Size:</label>
+        <select name="party_size" required>
+          {% for i in 1..6 %}
+            <option value="{{ i }}" {% if booking.party_size == i %}selected{% endif %}>{{ i }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit">Update Booking</button>
+      </form>
+      <button onclick="window.location.href='dashboard.php?token={{ token }}&date={{ date }}'">Cancel</button>
+    </div>
+  </div>
+</body>
+</html>

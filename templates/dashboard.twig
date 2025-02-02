@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - {{ date }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    /* Additional dashboard styles */
+    .dashboard-container { max-width: 800px; margin: 20px auto; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    .service-form, .booking-form { margin-bottom: 30px; }
+    .actions a { margin: 0 5px; }
+    .date-form { margin-bottom: 20px; text-align: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dashboard</h1>
+    <p>Welcome, {{ username }}. <a href="logout.php">Log Out</a></p>
+  </header>
+  <div class="dashboard-container">
+    <!-- Date selection -->
+    <form method="GET" action="dashboard.php" class="date-form">
+      <input type="hidden" name="token" value="{{ token }}">
+      <label for="date">Select Date:</label>
+      <input type="date" name="date" id="date" value="{{ date }}">
+      <button type="submit">Go</button>
+    </form>
+
+    <!-- Service Management Form -->
+    <h2>Services for {{ date }}</h2>
+    <form method="POST" class="service-form">
+      <input type="hidden" name="update_services" value="1">
+      <input type="hidden" name="date" value="{{ date }}">
+      <input type="hidden" name="token" value="{{ token }}">
+      <table>
+        <tr>
+          <th>Service</th>
+          <th>Time</th>
+          <th>Enabled</th>
+          <th>Seats Available</th>
+          <th>Remaining Seats</th>
+        </tr>
+        <tr>
+          <td>Breakfast</td>
+          <td>7am - 11am</td>
+          <td>
+            <input type="checkbox" name="breakfast_enabled" {% if services.breakfast.enabled == 1 %}checked{% endif %}>
+          </td>
+          <td>
+            <input type="number" name="breakfast_seats" value="{{ services.breakfast.available_seats }}" min="0">
+          </td>
+          <td>{{ remainingSeats.breakfast }}</td>
+        </tr>
+        <tr>
+          <td>Lunch</td>
+          <td>12pm - 4pm</td>
+          <td>
+            <input type="checkbox" name="lunch_enabled" {% if services.lunch.enabled == 1 %}checked{% endif %}>
+          </td>
+          <td>
+            <input type="number" name="lunch_seats" value="{{ services.lunch.available_seats }}" min="0">
+          </td>
+          <td>{{ remainingSeats.lunch }}</td>
+        </tr>
+        <tr>
+          <td>Dinner</td>
+          <td>6pm - 9pm</td>
+          <td>
+            <input type="checkbox" name="dinner_enabled" {% if services.dinner.enabled == 1 %}checked{% endif %}>
+          </td>
+          <td>
+            <input type="number" name="dinner_seats" value="{{ services.dinner.available_seats }}" min="0">
+          </td>
+          <td>{{ remainingSeats.dinner }}</td>
+        </tr>
+      </table>
+      <button type="submit">Update Services</button>
+    </form>
+
+    <!-- List Bookings -->
+    <h2>Bookings for {{ date }}</h2>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Service</th>
+        <th>Party Size</th>
+        <th>Customer Name</th>
+        <th>Phone</th>
+        <th>Actions</th>
+      </tr>
+      {% for booking in bookings %}
+      <tr>
+        <td>{{ booking.id }}</td>
+        <td>{{ booking.service_type }}</td>
+        <td>{{ booking.party_size }}</td>
+        <td>{{ booking.customer_name }}</td>
+        <td>{{ booking.customer_phone }}</td>
+        <td class="actions">
+          <a href="edit_booking.php?id={{ booking.id }}&token={{ token }}&date={{ date }}">Edit</a>
+          <a href="delete_booking.php?id={{ booking.id }}&token={{ token }}&date={{ date }}" onclick="return confirm('Delete this booking?');">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <!-- Add Booking Form -->
+    <div class="booking-form">
+      <h2>Add Booking</h2>
+      <form method="POST">
+        <input type="hidden" name="add_booking" value="1">
+        <input type="hidden" name="date" value="{{ date }}">
+        <input type="hidden" name="token" value="{{ token }}">
+        <input type="text" name="customer_name" placeholder="Customer Name" required>
+        <input type="text" name="customer_phone" placeholder="Customer Phone" required>
+        <label>Service:</label>
+        <select name="service_type" required>
+          <option value="" disabled selected>Select Service</option>
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+        </select>
+        <label>Party Size:</label>
+        <select name="party_size" required>
+          <option value="" disabled selected>Select Party Size</option>
+          {% for i in 1..6 %}
+            <option value="{{ i }}">{{ i }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit">Add Booking</button>
+      </form>
+    </div>
+  </div>
+  <footer>
+    &copy; 2025 Our Restaurant
+  </footer>
+</body>
+</html>

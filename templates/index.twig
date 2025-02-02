@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurant Booking</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <h2>Book Your Table</h2>
+  <form id="bookingForm" method="POST" action="/api/booking.php">
+      <label>Your Name: <input type="text" name="customer_name" required></label><br>
+      <label>Phone: <input type="text" name="customer_phone" required></label><br>
+      <label>Date: <input type="date" name="booking_date" required></label><br>
+      <label>Service:
+          <select name="service_type" required>
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+          </select>
+      </label><br>
+      <label>Party Size:
+          <select name="party_size" required>
+              {% for i in 1..6 %}
+                  <option value="{{ i }}">{{ i }}</option>
+              {% endfor %}
+          </select>
+      </label><br>
+      <button type="submit">Book Now</button>
+  </form>
+  <div id="result"></div>
+  <script>
+  document.getElementById('bookingForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('/api/booking.php', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+          document.getElementById('result').innerText = data.message;
+      })
+      .catch(err => console.error(err));
+  });
+  </script>
+</body>
+</html>

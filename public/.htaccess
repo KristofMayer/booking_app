@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /
+
+# Rewrite /login to login.php
+RewriteRule ^login/?$ login.php [L]
+
+# Rewrite /register to register.php
+RewriteRule ^register/?$ register.php [L]
