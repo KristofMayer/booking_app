@@ -17,6 +17,10 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    // In production, log errors instead of echoing them.
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+    // Instead of throwing an error, log it and return a JSON response
+    error_log("Database Connection Failed: " . $e->getMessage());
+
+    header("Content-Type: application/json");
+    echo json_encode(["error" => "Database connection failed."]);
+    exit;
 }

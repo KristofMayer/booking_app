@@ -1,6 +1,6 @@
 <?php
 // /api/booking.php
-require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../../includes/db.php';
 
 // Helper function for tables (if needed)
 function calculateTablesRequired($partySize) {
