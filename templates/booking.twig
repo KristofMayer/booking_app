@@ -11,17 +11,20 @@
     <div class="card">
       <h2>Book Your Table</h2>
       <form id="bookingForm" method="POST" action="/api/booking.php">
+        <label for="booking_date">Booking Date:</label>
+        <input type="date" name="booking_date" id="booking_date" value="{{ date }}" required>
+        
+        <label for="service_type">Service:</label>
+        <select name="service_type" id="service_type" required>
+          <option value="" disabled selected>Select Service</option>
+          <!-- Options will be populated dynamically -->
+        </select>
+        
         <input type="text" name="customer_name" placeholder="Your Name" required>
         <input type="text" name="customer_phone" placeholder="Phone" required>
-        <input type="date" name="booking_date" required>
-        <select name="service_type" required>
-          <option value="" disabled selected>Select Service</option>
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-        </select>
-        <select name="party_size" required>
-          <option value="" disabled selected>Party Size</option>
+        <label for="party_size">Party Size:</label>
+        <select name="party_size" id="party_size" required>
+          <option value="" disabled selected>Select Party Size</option>
           {% for i in 1..6 %}
             <option value="{{ i }}">{{ i }}</option>
           {% endfor %}
@@ -34,19 +37,60 @@
   <footer>
     &copy; 2025 Our Restaurant
   </footer>
+  
   <script>
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      fetch('/api/booking.php', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-          document.getElementById('result').innerText = data.message;
-      })
-      .catch(err => console.error(err));
+    document.addEventListener('DOMContentLoaded', function(){
+      const dateInput = document.getElementById('booking_date');
+      const serviceSelect = document.getElementById('service_type');
+      const bookingForm = document.getElementById('bookingForm');
+      
+      function fetchServices(date) {
+        fetch('/api/get_services.php?date=' + date)
+          .then(response => response.json())
+          .then(services => {
+            // Clear existing options
+            serviceSelect.innerHTML = '<option value="" disabled selected>Select Service</option>';
+            services.forEach(service => {
+              const option = document.createElement('option');
+              option.value = service;
+              option.textContent = service.charAt(0).toUpperCase() + service.slice(1);
+              serviceSelect.appendChild(option);
+            });
+          })
+          .catch(err => console.error(err));
+      }
+      
+      // Initially fetch services for the default date
+      fetchServices(dateInput.value);
+      
+      // Update services when the date changes
+      dateInput.addEventListener('change', function(){
+        fetchServices(this.value);
+      });
+      
+      // Handle form submission
+      bookingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(bookingForm);
+        fetch('/api/booking.php', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message); // pop-up message for feedback
+            if (data.message.indexOf('received') !== -1) {
+              // If booking successful, clear the form fields
+              bookingForm.reset();
+              // Re-fetch services for the new date (in case state changed)
+              fetchServices(dateInput.value);
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert("An error occurred while processing your booking.");
+        });
+      });
     });
   </script>
 </body>

@@ -50,16 +50,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_services'])) {
 
 // Handle adding a new booking
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_booking'])) {
-    $booking_date = $date;
+    // Use the booking date provided by staff; default to current dashboard date if missing.
+    $booking_date = $_POST['booking_date'] ?? $date;
     $service_type = $_POST['service_type'];
-    $party_size = intval($_POST['party_size']);
+    $party_size   = intval($_POST['party_size']);
     $customer_name = $_POST['customer_name'] ?? '';
     $customer_phone = $_POST['customer_phone'] ?? '';
+    
+    // (Optional) You might also check here that the service is enabled for $booking_date
+    $stmt = $pdo->prepare("SELECT enabled FROM services WHERE service_date = ? AND service_type = ?");
+    $stmt->execute([$booking_date, $service_type]);
+    $service = $stmt->fetch();
+    if (!$service || $service['enabled'] != 1) {
+        // Optionally: set an error message and do not add booking.
+        header("Location: dashboard.php?token=" . urlencode($token) . "&date=" . urlencode($date) . "&error=" . urlencode("Service disabled on selected date."));
+        exit;
+    }
+    
     $insert = $pdo->prepare("INSERT INTO bookings (booking_date, service_type, party_size, customer_name, customer_phone) VALUES (?, ?, ?, ?, ?)");
     $insert->execute([$booking_date, $service_type, $party_size, $customer_name, $customer_phone]);
-    header("Location: dashboard.php?token=" . urlencode($token) . "&date=" . urlencode($date));
+    // Redirect to dashboard for the chosen booking date.
+    header("Location: dashboard.php?token=" . urlencode($token) . "&date=" . urlencode($booking_date));
     exit;
 }
+
 
 // Fetch service records for the selected date
 $stmt = $pdo->prepare("SELECT * FROM services WHERE service_date = ?");

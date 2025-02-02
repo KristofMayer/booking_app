@@ -107,32 +107,41 @@
       {% endfor %}
     </table>
 
-    <!-- Add Booking Form -->
-    <div class="booking-form">
-      <h2>Add Booking</h2>
-      <form method="POST">
-        <input type="hidden" name="add_booking" value="1">
-        <input type="hidden" name="date" value="{{ date }}">
-        <input type="hidden" name="token" value="{{ token }}">
-        <input type="text" name="customer_name" placeholder="Customer Name" required>
-        <input type="text" name="customer_phone" placeholder="Customer Phone" required>
-        <label>Service:</label>
-        <select name="service_type" required>
-          <option value="" disabled selected>Select Service</option>
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-        </select>
-        <label>Party Size:</label>
-        <select name="party_size" required>
-          <option value="" disabled selected>Select Party Size</option>
-          {% for i in 1..6 %}
-            <option value="{{ i }}">{{ i }}</option>
-          {% endfor %}
-        </select>
-        <button type="submit">Add Booking</button>
-      </form>
-    </div>
+<!-- Add Booking Form -->
+<div class="booking-form">
+  <h2>Add Booking</h2>
+  <form method="POST">
+    <input type="hidden" name="add_booking" value="1">
+    <label for="booking_date">Booking Date:</label>
+    <input type="date" name="booking_date" id="booking_date" value="{{ date }}" required>
+    
+    <input type="text" name="customer_name" placeholder="Customer Name" required>
+    <input type="text" name="customer_phone" placeholder="Customer Phone" required>
+    
+    <label>Service:</label>
+    <select name="service_type" required>
+      <option value="" disabled selected>Select Service</option>
+      {% if services.breakfast.enabled == 1 %}
+        <option value="breakfast">Breakfast</option>
+      {% endif %}
+      {% if services.lunch.enabled == 1 %}
+        <option value="lunch">Lunch</option>
+      {% endif %}
+      {% if services.dinner.enabled == 1 %}
+        <option value="dinner">Dinner</option>
+      {% endif %}
+    </select>
+    <label>Party Size:</label>
+    <select name="party_size" required>
+      <option value="" disabled selected>Select Party Size</option>
+      {% for i in 1..6 %}
+        <option value="{{ i }}">{{ i }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Add Booking</button>
+  </form>
+</div>
+
   </div>
   <footer>
     &copy; 2025 Our Restaurant
