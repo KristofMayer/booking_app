@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Book Your Table</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/styles/styles.css">
 </head>
 <body>
   <div class="container">
@@ -68,7 +68,7 @@
         fetchServices(this.value);
       });
       
-      // Handle form submission
+      // Handle form submission with pop-up feedback
       bookingForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(bookingForm);
@@ -78,11 +78,9 @@
         })
         .then(response => response.json())
         .then(data => {
-            alert(data.message); // pop-up message for feedback
+            alert(data.message); // pop-up feedback
             if (data.message.indexOf('received') !== -1) {
-              // If booking successful, clear the form fields
               bookingForm.reset();
-              // Re-fetch services for the new date (in case state changed)
               fetchServices(dateInput.value);
             }
         })
