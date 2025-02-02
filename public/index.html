@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/styles/normalise.css">
+    <link rel="stylesheet" href="/assets/styles/main.css">
+    <title>Lancaster's Restaurant</title>
+</head>
+<body>
+    <header>
+        <nav>
+        <a href="#" class="nav-logo"></a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#menu" class="nav-link">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#reviews" class="nav-link">Reviews</a>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='booking.php'">Book Your Table</button>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+        <div class="bg"></div>
+            <h1 class="title">
+                Lancaster's <span class="restaurant">Restaurant</span>
+            </h1>
+            <img class="title_logo" src="/assets/media/img/logos/Lancaster's-logos_white.png" alt="Lancester logo">
+    </header>
+    <main>
+        <section id="about">
+            <h2>Discover Conscious Gastronomy in the heart of St James's</h2>
+            <article class="story">
+                <h1>Our Story</h1>
+                <p>
+                    Lancaster’s was founded by chef Ana Lancaster and Sommelier Robert Lancaster in May 2005. The essence of this combination makes up much of Fallows DNA, where conscious culinary creativity meets hospitality experience and passion for wine. What followed from their meeting were a series of sold-out residencies to establish Lancaster’s as one of the most exciting restaurant concepts on the UK restaurant scene. Lancaster’s permanent home in St James’s market was established in November 2010 and has since attracted a string of awards including both the Marie Claire and GQ ‘sustainable restaurant of the year’ and the Caterer award for ‘best new restaurant’. 
+                    Keep yourself updated by following us on <a href="https://www.instagram.com/fallowrestaurant" target="_blank">Instagram</a>. For collaborations please contact <a href="mailto:marketing@lancasters.com?subject=collaboration" target="_blank">marketing@lancasters.com</a> For business opportunities please contact Robert Lancaster at office@ lancasters.com.
+                    </p>
+            </article>
+        </section>
+        <section id="food">
+            <div class="carousel">
+                <div class="carouse__item carouse__item--visible">
+                    <img src="/assets/media/img/food/food-1.jpeg" alt="food_1">
+                </div>
+                <div class="carouse__item">
+                    <img src="/assets/media/img/food/food-2.jpeg" alt="food_2">
+                </div>
+                <div class="carouse__item">
+                    <img src="/assets/media/img/food/food-3.jpeg" alt="food_3">
+                </div>
+                <div class="carouse__item">
+                    <img src="/assets/media/img/food/food-4.jpeg" alt="food_4">
+                </div>
+                <div class="carouse__item">
+                    <img src="/assets/media/img/food/food-5.jpeg" alt="food_5">
+                </div>
+                <div class="carouse__item">
+                    <img src="/assets/media/img/food/food-6.jpeg" alt="food_6">
+                </div>
+                <div class="carouse__item">
+                    <img src="/assets/media/img/food/food-7.jpeg" alt="food_7">
+                </div>
+                <div class="carouse__buttons">
+                    <button id="carouse__buttons-prev" class="previous" aria-label="previous slide"><i class="fa-solid fa-caret-left"></i></button>
+                    <button id="carouse__buttons-next" class="next" aria-label="next slide"><i class="fa-solid fa-caret-right"></i></button>
+                </div>
+            </div>
+        </section>
+        <section id="menu">
+            <h1>Please have a look of our menu</h1>
+            <figure>
+                <a href="/assets/media/docs/Lancaster's Dinner Menu 17 Jun 2024.pdf" download><button class="download">MENU</button></a>
+                <figcaption>
+                    We are happy to accommodate dietary requirements. Please just make a note in your reservation or let us know upon arrival.  Lancaster’s is on ground level, with an accessible bathroom situated on the same floor. 
+                </figcaption>
+            </figure>
+        </section>
+        <section id="reviews" abelledby="reviews-section">
+            <div class="sticky">
+                <h1 aria-labelledby="reviews-section">Customer Reviews</h1>
+            </div>
+            <section aria-labelledby="review_1">
+
+                <article class="review" aria-labelledby="Handyspanner">
+                    <h1 aria-labelledby="Handyspanner"> Handyspanner <span class="rating">3/5</span> </h1>
+                    <h2>Nice food but cramped and erratic dining experience</h2>
+                    <h3>Aug 2024 • family</h3>
+                    <p>
+                        Came for lunch, enjoyed the corn ribs and mushroom parfait to start, then we had pork roast. The vegetables, roasties and meat could not be faulted.
+    The negative bit was the service, we had to chase our drinks(3 times) and our server was a little erratic and rushed.
+    A very busy place, luckily we were three and were given a table for four. It was a little tight for couples who appeared “crammed “ on small tables for two that were close together.
+    Nice food but a hectic and confined eating experience. Also question people being allowed to bring dogs into the restaurant, also allowing it to feed there.
+    
+                    </p>
+                    <footer>
+                        <p>Written <time datetime="2024-08-26">26 August 2024</time></p>
+                    </footer>
+                </article>
+                <article class="reply" aria-labelledby="Roe_Restaurant_reply_1">
+                    <h1 aria-labelledby="Roe_restaurant_reply_1"> Roe Restaurant reply</h1>
+                    <p>
+                        Thank you for your feedback and we're so pleased that you enjoyed the food. Sorry to hear that the service was not up to expected standards, whilst we strive to always offer an excellent experience, we understand sometimes we don't deliver on this and are always looking for ways to improve. We hope that despite this, you'll join us again soon so we can offer you a better experience. Kind regards, The Fallow Team 
+                    </p>
+                    <footer>
+                        <p>Written <time datetime="2024-09-02">2 September 2024</time></p>
+                    </footer>
+                </article>
+            </section>
+            <hr>
+            <section aria-labelledby="review_2">
+
+                <article class="review" aria-labelledby="Elizabeth S">
+                    <h1 aria-labelledby="Elizabeth S"> Elizabeth S <span class="rating">5/5</span> </h1>
+                    <h2>Yum!</h2>
+                    <h3>Aug 2024 • couples</h3>
+                    <p>
+                        Had a great dinner here during our trip to London from the states. Highly recommend the mushroom parfait, ribs, and strawberry custard cream. The mussels and burger were also very good. Server was attentive and had great knowledge of the menu.
+                    </p>
+                    <footer>
+                        <p>Written <time datetime="2024-08-24">24 August 2024</time></p>
+                    </footer>
+                </article>
+                <article class="reply" aria-labelledby="Roe_Restaurant_reply_2">
+                    <h1 aria-labelledby="Roe_restaurant_reply_2"> Roe Restaurant reply</h1>
+                    <p>
+                        Thanks so much for your lovely review and we're so pleased that you enjoyed your experience with us. We absolutely love the mushroom parfait and ribs too! We're pleased to hear that the team looked after you too. Hopefully we'll see you again on another trip to London. We also think you will love our sister restaurant, Roe which is located in Wood Wharf so please join us there and we'll make sure you're looked after.
+
+                    </p>
+                    <footer>
+                        <p>Written <time datetime="2024-09-02">2 September 2024</time></p>
+                    </footer>
+                </article>
+            </section>
+            <hr>
+            <section aria-labelledby="review_3">
+
+                <article class="review" aria-labelledby="BJM">
+                    <h1 aria-labelledby="BJM"> BJM <span class="rating">5/5</span> </h1>
+                    <h2>Stunning food</h2>
+                    <h3>Aug 2024 • friends</h3>
+                    <p>
+                        Booked to dine here on a Friday night having been a fan of the owners YouTube account for a while now. The restaurant was busy but we got seated straight away and were given water by the waiter. We were left with the menu for 10 mins or so and then ordered our drinks and food.
+                        Between the two of us we had the corn ribs and croquettes to start and for main sirloin steak and the halibut tikka with muscles. We both went for the Chelsea tart for dessert.
+                        I was slightly worried that it wouldn't live up to expectations given how much I'd hyped it up in the build up but it was genuinely one of the best meals I've had all year. Some of the most flavoursome, lip smacking, finger licking food I've ever eaten. I could eat those corn ribs every day for the rest of my life and never get bored. Absolutely adored this place and will definitely return when I'm next in London
+                        
+                    </p>
+                    <footer>
+                        <p>Written <time datetime="2024-08-20">20 August 2024</time></p>
+                    </footer>
+                </article>
+            </section>
+            <hr>
+            <section aria-labelledby="review_4">
+
+                <article class="review" aria-labelledby="christopher a">
+                    <h1 aria-labelledby="christopher a"> christopher a <span class="rating">5/5</span> </h1>
+                    <h2>Excellent food and great atmosphere</h2>
+                    <h3>Aug 2024 • couples</h3>
+                    <p>
+                        Exceptional food combined with wonderful service - the mushroom parfait and the beef ribs were sensational.
+                        Can’t wait to return!
+                        
+                    </p>
+                    <footer>
+                        <p>Written <time datetime="2024-08-19">19 August 2024</time></p>
+                    </footer>
+                </article>
+            </section>
+            <hr>
+            <section aria-labelledby="review_5">
+
+                <article class="review" aria-labelledby="Mandy A">
+                    <h1 aria-labelledby="Mandy A"> Mandy A <span class="rating">5/5</span> </h1>
+                    <h2>Fantastic vibe, service, staff and food.</h3>
+                    <h3>Aug 2024 • friends</h4>
+                    <p>
+                        My brother and I have been following Fallow on social media for some time and finally decided to take a visit with our partners.
+                        On arrival, staff were friendly and helpful and we were taken to our table.
+                        The restaurant has a great vibe and watching the chefs (or should i say artists) at work is just something else.
+                        We ordered a few things off the menu to start as there was so much choice and we wanted it all!
+                        Our server was knowledgeable and explained what was not available and what he would recommend too.
+                        What makes for amazing service. Offering drinks when they can see our drinks were running low. All without being asked.
+                        Table wiped between courses.
+                        Friendly, happy staff. Just great.
+                        The food was 10/10 and my husband says its the best burger he's ever had!
+                        We unfortunately didn't order dessert as we were too full but will do next time we visit.
+                        All in all a fantastic visit. We really couldn't fault any of it. Staff, vibe, service and food all just fantastic. Well done Fallow we are already planning our next visit.
+                        
+                    </p>
+                    <footer>
+                        <p>Written <time datetime="2024-08-17">17 August 2024</time></p>
+                    </footer>
+                </article>
+            </section>
+            <hr>
+            <section aria-labelledby="review_6">
+                <article class="review" aria-labelledby="Tom C">
+                    <h1 aria-labelledby="Tom C"> Tom C <span class="rating">5/5</span> </h1>
+                    <h2>Great brunch</h3>
+                    <h3>Aug 2024 • couples</h4>
+                    <p>
+                        Just had brunch food delicious service 5star this restaurant is performing at every level we just love coming back. If you’re anywhere near it’s a must book as very busy.  
+                    </p>
+                    <footer>
+                        <p>Written <time datetime="2024-08-17">17 August 2024</time></p>
+                    </footer>
+                </article>
+            </section>
+        </section>
+        <section id="staff">
+            <div class="staff__title">
+                <h1>Meet our Staff</h1>
+            </div>
+            <div class="staff__img">
+                <div class="staff__img-container">
+                    <figure>
+                        <img src="/assets/media/img/people/ana-plating.jpeg" alt="Rober">
+                        <figcaption>
+                            <p>Ana</p>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="staff__img-container">
+                <figure>
+                    <img src="/assets/media/img/people/robert-check.jpeg" alt="Ana">
+                    <figcaption>
+                        <p>Robert</p>
+                    </figcaption>
+                </figure>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <address>
+            <a href="https://www.google.com/maps/place/52+Haymarket,+London+SW1Y+4RP/@51.5092873,-0.1355915,17z/data=!3m1!4b1!4m6!3m5!1s0x487604d1648bb62d:0x930a46e035a5941e!8m2!3d51.509284!4d-0.1330166!16s%2Fg%2F1tdcwkwj?entry=ttu&g_ep=EgoyMDI0MTExMy4xIKXMDSoASAFQAw%3D%3D" target="_blank">
+                <i class="fa-solid fa-location-dot"></i>
+            </a>
+            <p>
+                52 Haymarket<br>
+                London<br>
+                SW1Y 4RP<br>
+            </p>
+        </address>
+        <section class="times">
+            <h2>Opening times <span><i class="fa-regular fa-clock"></i></span></h2>
+            <ul>
+                <li>Mon - Fri: 7:30 am - 11 pm</li>
+                <li>Sat: 9 am - 11 pm</li>
+                <li>Sun: 11:30 am - 10 pm</li>
+            </ul>
+        </section>
+        <section id="social_media">
+            <a class="insta" href="https://www.instagram.com/fallowrestaurant" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a class="youtube" href="https://www.youtube.com/channel/UCJ901NqoRaXMnIm7aOjLyuA" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a class="tiktok" href="https://www.tiktok.com/@fallow_restaurant?lang=en" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+        </section>
+    </footer>
+    <script src="/assets/js/hamburger.js"></script>
+    <script src="/assets/js/carousel.js"></script>
+</body>
+</html>

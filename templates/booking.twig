@@ -15,13 +15,17 @@
         <input type="date" name="booking_date" id="booking_date" value="{{ date }}" required>
         
         <label for="service_type">Service:</label>
+        <!-- Static dropdown listing all services -->
         <select name="service_type" id="service_type" required>
           <option value="" disabled selected>Select Service</option>
-          <!-- Options will be populated dynamically -->
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
         </select>
         
         <input type="text" name="customer_name" placeholder="Your Name" required>
         <input type="text" name="customer_phone" placeholder="Phone" required>
+        
         <label for="party_size">Party Size:</label>
         <select name="party_size" id="party_size" required>
           <option value="" disabled selected>Select Party Size</option>
@@ -39,59 +43,27 @@
   </footer>
   
   <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const dateInput = document.getElementById('booking_date');
-  const serviceSelect = document.getElementById('service_type');
-
-  // Ensure the date input has a valid value; if empty, set it to today's date.
-  if (!dateInput.value) {
-    const today = new Date().toISOString().slice(0, 10);
-    dateInput.value = today;
-    console.log("Date input was empty. Set to today's date:", today);
-  }
-  console.log("Booking date input value:", dateInput.value);
-
-  // Function to fetch enabled services for the given date
-  function fetchServices(date) {
-    console.log("Fetching services for date:", date);
-    fetch('/api/get_services.php?date=' + date)
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('/api/booking.php', {
+        method: 'POST',
+        body: formData
+      })
       .then(response => response.json())
-      .then(services => {
-        console.log("Services returned from API:", services);
-        // Clear existing options and add the default option.
-        serviceSelect.innerHTML = '<option value="" disabled selected>Select Service</option>';
-        if (Array.isArray(services) && services.length > 0) {
-          services.forEach(service => {
-            const option = document.createElement('option');
-            option.value = service;
-            // Capitalize the first letter
-            option.textContent = service.charAt(0).toUpperCase() + service.slice(1);
-            serviceSelect.appendChild(option);
-          });
-        } else {
-          console.error("No services returned for date:", date);
-          // Add a fallback option if no services are available.
-          const option = document.createElement('option');
-          option.value = "";
-          option.textContent = "No services available";
-          serviceSelect.appendChild(option);
-        }
+      .then(data => {
+          // Display a popup with the response message.
+          alert(data.message);
+          // If booking was successful (message contains "received"), clear the form.
+          if (data.message.indexOf('received') !== -1) {
+            this.reset();
+          }
       })
       .catch(err => {
-        console.error("Error fetching services:", err);
+          console.error(err);
+          alert("The service is not available or we don't have enough available seats for you party. Please call us!");
       });
-  }
-
-  // Initially fetch services for the default date
-  fetchServices(dateInput.value);
-
-  // Update services when the date changes
-  dateInput.addEventListener('change', function() {
-    console.log("Date changed to:", this.value);
-    fetchServices(this.value);
-  });
-});
-</script>
-
+    });
+  </script>
 </body>
 </html>
